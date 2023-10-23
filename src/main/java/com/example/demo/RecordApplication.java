@@ -22,8 +22,8 @@ private String folderName;
 		SpringApplication.run(RecordApplication.class, args);
 	}
 
-	@Bean
-	public PasswordEncoder passwordencoder() {
+    @Bean
+  public  PasswordEncoder passwordencoder() {
 		return new BCryptPasswordEncoder();
 	}
 

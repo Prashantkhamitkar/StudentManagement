@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import com.example.demo.filter.Jwtfilter;
 
+
 @EnableWebSecurity
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -31,8 +32,8 @@ public class SecurityConfig {
 		.authenticationEntryPoint((req,res,exc)->res.sendError(HttpStatus.UNAUTHORIZED.value(),"Not Yet Authenticated"))
 		.and().csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
-		.antMatchers("/users*/*","/home/signup","/users/**","/student/image/*","/student/signup","/student/").permitAll()
-		.antMatchers("/admin/remove").hasRole("ADMIN")
+		.antMatchers("/users*/*","/course/*","/course/*/*","/home/signup","/users/","/student/image/*","/student/signup","/student/*").permitAll()
+		.antMatchers("/admin/remove","/student/").hasRole("ADMIN")
 		.antMatchers("/admin/signup").hasRole("STUDENT")
 		.antMatchers("/seller/add").hasRole("TEACHER")
 		

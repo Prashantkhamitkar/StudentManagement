@@ -23,7 +23,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dao.Studentdao;
+import com.example.demo.dto.Addressdto;
 import com.example.demo.dto.Studentdto;
+import com.example.demo.exception.CustomException;
+import com.example.demo.model.Address;
 import com.example.demo.model.Role;
 import com.example.demo.model.Student;
 
@@ -35,16 +38,17 @@ public class Studentserviceimg implements StudentService{
 	private Studentdao dao;
 	
 	@Override
-	public String uploadImage(Long id,String path, MultipartFile image) throws IOException {
+	public String uploadImage(Studentdto sd,String path, MultipartFile image) throws IOException {
 		String filename=image.getOriginalFilename();
 		//now we are going to separate this file name and attach to one random numbers 
 		String randomname=UUID.randomUUID().toString();
 		String newname=randomname.concat(filename.substring(filename.lastIndexOf(".")));
 		String fullpath=path+File.separator+newname;
+		System.out.println(newname);
 		//getinputstream-Returns the input stream connected to the normal output of the subprocess.
 		Files.copy(image.getInputStream(),Paths.get(fullpath));
 		
-Optional<Student> st=dao.findById(id);
+/*Optional<Student> st=dao.findById(id);
 System.out.println(st.toString());
 	if(st.isPresent()) {
 	Student student=st.get();
@@ -53,10 +57,11 @@ System.out.println(st.toString());
 	student.setFirstname(student.getFirstname());
 	student.setLastname(student.getLastname());
 	student.setPassword(student.getPassword());
-	student.setEmail(student.getEmail());
+	student.setEmail(student.getEmail());*/
+		Student student =new Student(sd.getFirstname(),sd.getLastname(), newname, sd.getMobilenumber(), sd.getEmail(),sd.getPassword(),Role.STUDENT);
 		if(dao.save(student)!=null)
 			return "success";
-	}
+	
 		return "fail";
 	}
 
@@ -64,6 +69,7 @@ System.out.println(st.toString());
 	public InputStream getResource(String path, String filename) throws FileNotFoundException {
 		// TODO Auto-generated method stub
 		//now we are making full path
+		//home/sunbeam/uploads/5a32cdd7-aaee-4c20-ac70-d2d451b5c4a8.jpeg
 		String fullpath=path+File.separator+filename;
 		//reading streams of raw bytes such as image data. 
 		InputStream is=new FileInputStream(fullpath);
@@ -97,6 +103,52 @@ System.out.println(st.toString());
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Student loginuser(String email, String password) {
+		// TODO Auto-generated method stub
+		Student st=dao.findByEmailAndPassword(email, password);
+		if(st!=null)
+		return st;
+		return null;
+	}
+
+	@Override
+	public Studentdto getByid(Long id) {
+		// TODO Auto-generated method stub
+	Student std=dao.findById(id).orElseThrow(()->new CustomException("not found"));
+		Studentdto s=new Studentdto(std.getId(), std.getFirstname(), std.getLastname(), std.getEmail(), std.getPassword(), std.getImagename(), std.getMobilenumber());
+	return s;
+	}
+
+	@Override
+	public String getuserbymail(Addressdto dto) {
+		// TODO Auto-generated method stub
+		Student st=dao.findByEmail(dto.getEmail());
+		if(st!=null) {
+		Address ad=new Address();
+	
+		ad.setInputAddress(dto.getInputAddress());
+		ad.setInputAddress2(dto.getInputAddress2());
+		ad.setInputCity(dto.getInputCity());
+		ad.setInputZip(dto.getInputZip());
+		ad.setState(dto.getState());
+		ad.setStudent(st);
+		st.setAddress(ad);
+		if(dao.save(st)!=null)
+		return "success";}
+		return "fail";
+	}
+
+	@Override
+	public String Deletestudent(Long id) {
+		// TODO Auto-generated method stub
+		if(id!=null) {
+			dao.deleteById(id);
+			return "success";
+		}
+		return "fail";
 	}
 
 	

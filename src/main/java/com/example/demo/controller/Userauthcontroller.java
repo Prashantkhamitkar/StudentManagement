@@ -17,7 +17,7 @@ import com.example.demo.utils.JwtUtils;
 
 @RestController
 @RequestMapping("/users")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000/")
 public class Userauthcontroller {
 
 	@Autowired
@@ -29,6 +29,7 @@ public class Userauthcontroller {
 		System.out.println(request.getEmail()+" "+request.getPassword());
 		Authentication principle =mgr.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
 String jwttoken=	jwtutils.generatToken(principle);
+System.out.println(jwttoken);
 	return ResponseEntity.ok(new Signinresponse(jwttoken,"user is authenticated"));
 	}
 }
