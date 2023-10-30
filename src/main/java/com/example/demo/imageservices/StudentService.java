@@ -21,4 +21,5 @@ Student loginuser(String email,String password);
 Studentdto getByid(Long id);
 String getuserbymail(Addressdto dto);
 String Deletestudent(Long id);
+String updatepassword(String s,String password);
 }

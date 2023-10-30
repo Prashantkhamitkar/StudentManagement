@@ -151,5 +151,21 @@ System.out.println(st.toString());
 		return "fail";
 	}
 
+	@Override
+	public String updatepassword(String mail,String password) {
+		// TODO Auto-generated method stub
+		//now here firstoff all find the existing user 
+		Student student=dao.findByEmail(mail);
+		if(student!=null)
+		{
+			student.setPassword(password);
+			if(dao.save(student)!=null) {
+				return "Success";
+			}
+			
+		}
+		return null;
+	}
+
 	
 }

@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.dto.Addressdto;
 import com.example.demo.dto.Signinrequest;
 import com.example.demo.dto.Studentdto;
+import com.example.demo.emailservice.Emailserviceclass;
 import com.example.demo.exception.CustomException;
 import com.example.demo.imageservices.StudentService;
 import com.example.demo.model.Student;
@@ -41,6 +42,9 @@ public class StudentController {
 private String path;
 @Autowired
 private StudentService std;
+@Autowired
+private Emailserviceclass servobj;
+
 	@PostMapping("/")
 	public ResponseEntity<?> login(@RequestBody Signinrequest st){
 		System.out.println(st.getEmail()+" "+st.getPassword());
@@ -87,5 +91,14 @@ public ResponseEntity<String> updateaddress(@RequestBody Addressdto dto) {
 @DeleteMapping("/{id}")
 public ResponseEntity<String> deletestudent(@PathVariable Long id){
 	return ResponseEntity.ok(std.Deletestudent(id));
+}
+@GetMapping("/send/{mail}")
+public ResponseEntity<String> sendmail(@PathVariable String mail) {
+String otp=servobj.sendmail(mail);
+	return ResponseEntity.ok(otp);
+}
+@PostMapping("/send/{mail}")
+public ResponseEntity<String> updatepassword(@PathVariable String mail,@RequestBody Signinrequest password){
+	return ResponseEntity.ok(std.updatepassword(mail, password.getPassword()));
 }
 }

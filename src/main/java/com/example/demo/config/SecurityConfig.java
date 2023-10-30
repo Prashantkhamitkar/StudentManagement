@@ -32,7 +32,7 @@ public class SecurityConfig {
 		.authenticationEntryPoint((req,res,exc)->res.sendError(HttpStatus.UNAUTHORIZED.value(),"Not Yet Authenticated"))
 		.and().csrf().disable().authorizeRequests()
 		.antMatchers(HttpMethod.OPTIONS).permitAll()
-		.antMatchers("/users*/*","/course/*","/course/*/*","/home/signup","/users/","/student/image/*","/student/signup","/student/*").permitAll()
+		.antMatchers("/users*/*","/student/*","/course/*","/course/*/*","/home/signup","/users/","/student/image/*","/student/signup","/student/send/*").permitAll()
 		.antMatchers("/admin/remove","/student/").hasRole("ADMIN")
 		.antMatchers("/admin/signup").hasRole("STUDENT")
 		.antMatchers("/seller/add").hasRole("TEACHER")
