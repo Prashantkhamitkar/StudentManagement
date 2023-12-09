@@ -28,6 +28,7 @@ public class CourseController {
 	
 	@GetMapping("/")
 	public ResponseEntity<List<Course>> getallcoursedetails(){
+		System.out.println(coursedao.getAllcourses());
 		return ResponseEntity.ok(coursedao.getAllcourses());
 	}
 	@GetMapping("/{name}")

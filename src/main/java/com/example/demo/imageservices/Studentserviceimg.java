@@ -134,7 +134,7 @@ System.out.println(st.toString());
 		ad.setInputCity(dto.getInputCity());
 		ad.setInputZip(dto.getInputZip());
 		ad.setState(dto.getState());
-		ad.setStudent(st);
+	ad.setStudent(st);
 		st.setAddress(ad);
 		if(dao.save(st)!=null)
 		return "success";}

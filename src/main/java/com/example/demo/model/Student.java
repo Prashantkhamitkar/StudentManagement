@@ -15,6 +15,10 @@ import org.hibernate.annotations.ManyToAny;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,9 +43,12 @@ private String email;
 private String password;
 @Enumerated(EnumType.STRING)
 private Role role;
+@JsonManagedReference
 @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
 @JoinColumn(name="address_id")
 private Address address;
+
+@JsonBackReference
 @ManyToOne
 (cascade=CascadeType.ALL)
 @JoinColumn(name="course_id")

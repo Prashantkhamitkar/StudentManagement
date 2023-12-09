@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,7 @@ private String duration;
 private String location;
 @Column(length = 1000)
 private String prerequisites;
+@JsonManagedReference
 @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
 private List<Student> student=new ArrayList<>();
 
