@@ -26,11 +26,14 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.dto.Addressdto;
+import com.example.demo.dto.Paymentdto;
 import com.example.demo.dto.Signinrequest;
 import com.example.demo.dto.Studentdto;
 import com.example.demo.emailservice.Emailserviceclass;
 import com.example.demo.exception.CustomException;
+import com.example.demo.imageservices.PaymentserviceInterface;
 import com.example.demo.imageservices.StudentService;
+import com.example.demo.model.Payment;
 import com.example.demo.model.Student;
 
 @RestController
@@ -44,16 +47,27 @@ private String path;
 private StudentService std;
 @Autowired
 private Emailserviceclass servobj;
+@Autowired
+private PaymentserviceInterface paymentservice;
 
 	@PostMapping("/")
 	public ResponseEntity<?> login(@RequestBody Signinrequest st){
+		
 		System.out.println(st.getEmail()+" "+st.getPassword());
 		if(std.loginuser(st.getEmail(), st.getPassword())!=null)
 		return ResponseEntity.ok(std.loginuser(st.getEmail(), st.getPassword()));
 		
 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
 	}
-	
+	@PostMapping("/makepayment")
+	public ResponseEntity<String> makepayment(@RequestBody Paymentdto payment){
+		System.out.println(payment.toString());
+		String str=paymentservice.makePayment(payment);
+		if(str.equals("Success"))
+		return ResponseEntity.ok("success");
+		return ResponseEntity.ok("fail");
+		
+	}
 @PostMapping("/signup")
 	public ResponseEntity<?> uploadImage(@RequestParam("file") MultipartFile file,@ModelAttribute Studentdto sd){
 			try {

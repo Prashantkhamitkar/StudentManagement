@@ -98,7 +98,7 @@ System.out.println(st.toString());
 		// TODO Auto-generated method stub
 		List<Student> list=dao.findAll();
 		if(list!=null) {
-		List<Studentdto> ls=list.stream().map(s->new Studentdto(s.getId(),s.getFirstname(),s.getLastname(), s.getEmail(), s.getPassword(), s.getImagename(), s.getMobilenumber())).collect(Collectors.toList());
+		List<Studentdto> ls=list.stream().map(s->new Studentdto(s.getId(),s.getFirstname(),s.getLastname(), s.getEmail(), s.getPassword(), s.getImagename(), s.getMobilenumber(),s.getIspurchased())).collect(Collectors.toList());
 		return ls;
 		}
 		
@@ -118,7 +118,7 @@ System.out.println(st.toString());
 	public Studentdto getByid(Long id) {
 		// TODO Auto-generated method stub
 	Student std=dao.findById(id).orElseThrow(()->new CustomException("not found"));
-		Studentdto s=new Studentdto(std.getId(), std.getFirstname(), std.getLastname(), std.getEmail(), std.getPassword(), std.getImagename(), std.getMobilenumber());
+		Studentdto s=new Studentdto(std.getId(), std.getFirstname(), std.getLastname(), std.getEmail(), std.getPassword(), std.getImagename(), std.getMobilenumber(),std.getIspurchased());
 	return s;
 	}
 
@@ -164,6 +164,24 @@ System.out.println(st.toString());
 			}
 			
 		}
+		return null;
+	}
+
+	@Override
+	public Student getuserbyEmail(String email) {
+		// TODO Auto-generated method stub
+		Student student=dao.findByEmail(email);
+		if(student!=null)
+		return student;
+		return null;
+	}
+
+	@Override
+	public Student getstudentbyid(Long id) {
+		// TODO Auto-generated method stub
+		Optional<Student> student=dao.findById(id);
+	if(student!=null)
+		return student.get();
 		return null;
 	}
 

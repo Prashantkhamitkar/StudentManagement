@@ -21,6 +21,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 
 @Getter
@@ -28,6 +29,7 @@ import net.bytebuddy.dynamic.loading.ClassReloadingStrategy.Strategy;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+
 public class Course {
 @Id
 private long cid;
@@ -45,7 +47,9 @@ private String prerequisites;
 @JsonManagedReference
 @OneToMany(mappedBy = "course",fetch = FetchType.EAGER)
 private List<Student> student=new ArrayList<>();
-
+@JsonManagedReference
+@OneToOne(mappedBy = "course")
+private Payment payment;
 /*
  * @OneToMany(mappedBy="course",fetch=FetchType.EAGER,cascade = CascadeType.ALL)
  * private Set<Syllabus> syllabus;

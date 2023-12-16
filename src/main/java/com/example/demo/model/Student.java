@@ -30,7 +30,7 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+
 public class Student {
 @Id
 @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +53,9 @@ private Address address;
 (cascade=CascadeType.ALL)
 @JoinColumn(name="course_id")
 private Course course;
+@OneToOne(mappedBy = "student")
+private Payment payment;
+private int ispurchased=0;
 //this is our non owning side 
 //non owning means its doesn't contain any foreign key
 public Student(String firstname, String lastname, String imagename, String mobilenumber, String email, String password,
