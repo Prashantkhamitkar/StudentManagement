@@ -1,0 +1,23 @@
+.password-input-container {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .password-input {
+    width: 100%; /* Ensure the input takes up the full width */
+    padding-right: 2.5rem; /* Leave space for the icon */
+    line-height: 1.5; /* Vertically center the content */
+    font-size: 16px; /* Adjust the font size */
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    bottom: 8px; /* Adjust the right position as needed */
+    cursor: pointer;
+    font-size: 20px; /* Adjust the font size to make it smaller */
+    background-color: transparent !important;  
+}
+  
+  

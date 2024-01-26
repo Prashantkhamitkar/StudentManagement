@@ -1,0 +1,32 @@
+.syllabus-container {
+    position: relative;
+    display: inline-block;
+    
+       /* background: linear-gradient(to right, #e02e06, #04eb2f); /* Define your gradient colors */
+      /*  -webkit-background-clip: text;
+        color: transparent;
+        transition: color 0.3s ease;
+      */}
+    
+  
+  
+  .syllabus-popup {
+    position: absolute;
+  bottom: 100%; /* Change 'top' to 'bottom' */
+  left: 0;
+  width: 400px;
+  height: 400px;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: none;
+  transform: translateY(-10px);
+  font-weight: bold;
+
+  }
+  
+  .syllabus-container:hover .syllabus-popup {
+    display: block;
+  }
+  

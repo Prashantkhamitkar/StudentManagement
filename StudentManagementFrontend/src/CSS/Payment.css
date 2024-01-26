@@ -1,0 +1,141 @@
+/* Default styles for cards */
+.cards {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 350px;
+    height: 450px;
+  }
+  .divrow{
+   
+    display: grid;
+  grid-template-columns: 1fr; /* Three equal columns */
+  gap: 38px; /* Gap between grid items */
+  }
+  
+  /* Styles for payment card */
+  .cardsforpayment {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Changed alignment */
+    flex-direction: column;
+    padding: 15px;
+    margin-top: 10px;
+  }
+ 
+  /* Label styles */
+  .form-group label {
+    color: #222222;
+    font-size: 15px;
+    margin: 0px;
+    margin-bottom: 3px; /* Added margin bottom */
+    font-weight: bold; /* Moved font-weight here */
+  }
+  .paymentbody label {
+    color: #222222;
+    font-size: 15px;
+    padding: 5px;
+     /* Added margin bottom */
+    font-weight: bold; /* Moved font-weight here */
+    
+  }
+  .formdata{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  /* Image styles */
+  .imgpayment {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+   
+    border-radius: 50%;
+    
+    margin-top: 15px; /* Adjusted margin */
+  }
+  
+  /* Styles for card body */
+  .paymentbody {
+    margin-top: 10px;
+  }
+  
+  /* Styles for form groups */
+  .paymentgroup {
+    margin-bottom: 10px; /* Adjusted margin */
+  }
+  
+  /* Styles for input fields */
+  .paymentcontrol {
+    width: 100%;
+    padding: 10px; /* Adjusted padding */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Added box-sizing */
+  }
+  
+  /* Responsive styles for different screen sizes */
+  @media screen and (max-width: 768px) {
+    .imgpayment {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .paymentcontrol {
+      width: calc(100% - 16px); /* Adjust input width for responsiveness */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .imgpayment {
+      width: 120px;
+      height: 120px;
+    }
+  }
+  
+  /* General styles */
+  .section {
+    margin-bottom: 20px; /* Adjusted margin */
+  }
+  .card-title{
+    text-align: center;
+  }
+  /* Styles for section headings */
+  .section h2 {
+    margin-bottom: 10px; /* Adjusted margin */
+    font-size: 24px;
+    /* text-align: center; */
+  }
+  
+  /* Responsive styles for section headings */
+  @media screen and (max-width: 768px) {
+    .section h2 {
+      font-size: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .section h2 {
+      font-size: 18px;
+    }
+
+  }
+  @media screen and (min-width: 768px) {
+  .divrow {
+    grid-template-columns: repeat(2, 1fr); /* Two columns for medium screens */
+  }
+}
+
+/* Adjust grid layout for larger screens */
+@media screen and (min-width: 1200px) {
+  .divrow {
+    grid-template-columns: repeat(3, 1fr); /* Three columns for larger screens */
+  }
+}
+.form-group-label{
+    margin-top: 20px;
+}
+.form-group-label label{
+    margin: 5px;
+}
